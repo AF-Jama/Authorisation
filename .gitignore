@@ -1,0 +1,11 @@
+// env file containing personal configuration data
+
+.env
+
+// node modules
+
+node_modules
+
+// idea file
+
+idea.txt
