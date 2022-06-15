@@ -48,6 +48,19 @@ const authTable = sequelize.define('authTable',{
         allowNull:false,
         unique:true,
     },
+    password:{
+        type:CHAR(60),
+        allowNull:false,
+    },
+    created_at:{
+        type:DATE,
+        allowNull:false,
+        //create default timestamp
+        defaultValue:DataTypes.NOW
+    }
+    
+},{
+    timestamps:false  
 })
 
 /* 
@@ -60,30 +73,34 @@ const authTable = sequelize.define('authTable',{
 
 */
 
-const authPasswords = sequelize.define('authPasswords',{
-    pID:{
-        type:BIGINT,
-        allowNull:false,
-        primaryKey:true,
-        autoIncrement:true,
-    },
-    userId:{
-        type:BIGINT,
-        allowNull:false,
-        references:{
-            model:authTable,
-            key:'id',
-            
-            
-        },
-        onDelete:'cascade'
-    },
-})
+// const authPasswords = sequelize.define('authPasswords',{
+//     pID:{
+//         type:BIGINT,
+//         allowNull:false,
+//         primaryKey:true,
+//         autoIncrement:true,
+//     },
+//     userId:{
+//         type:BIGINT,
+//         allowNull:false,
+//         references:{
+//             model:authTable,
+//             key:'id',
+//         },
+//         onDelete:'cascade'
+//     },
+//     password:{
+//         type:CHAR(60),
+//         allowNull:false,
+//     }
+// },{
+//     timestamps:false
+// })
 
 async function createTable(){
     try {
-        await authTable.sync()
-        await authPasswords.sync()   
+        await authTable.sync({alter:true})
+        // await authPasswords.sync({alter:true})   
     } catch (error) {
         console.log(`Error ${error}`)
     }
@@ -93,6 +110,6 @@ async function createTable(){
 
 module.exports = {
     authTable,
-    authPasswords  
+    sequelize,
 }; //exporting pool connection to database
 
