@@ -13,7 +13,7 @@ const emailMiddleware = (req,res,next)=>{
     }
 }
 
-validateEmail("")
+// validateEmail("")
 
 const validatePassword = (password)=>{
     let re = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[^\w\s]).{8,}$/;
@@ -31,8 +31,8 @@ const passwordMiddleware = (req,res,next)=>{
 }
 
 const validateUsername = (username)=>{
-    let re = /^[a-z0-9?._-]{6,16}$/
-    if(!res.test(username)) throw new Error('Invalid username')
+    let re = /^(?!.*\.\.)(?!.*\.$)[^\W][\w.]{0,29}$/
+    if(!re.test(username)) throw new Error('Invalid username')
 }
 
 const usernameMiddleware = (req,res,next)=>{

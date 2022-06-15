@@ -14,6 +14,7 @@ const createAccount = async (req,res,next)=>{
             msg:"Succesfully created"
         })
     } catch (error) {
+        error.status = 900
         next(error)
     }
 }
