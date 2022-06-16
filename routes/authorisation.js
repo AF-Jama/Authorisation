@@ -4,7 +4,7 @@ const validator = require('express-joi-validation').createValidator({})
 const {createAccountSchema,loginSchema} = require('../schema.js') // payloads schemas
 const {emailMiddleware,passwordMiddleware,usernameMiddleware} = require('../middleware/custom_middleware.js')
 const {createAccount} = require('../controllers/create_controller.js') // create account controller
-// const {} = require('../controllers/login_controller.js')
+const {loginController} = require('../controllers/login_controller.js')
 
 const router = express.Router()
 
@@ -21,7 +21,7 @@ router.get('/',(req,res)=>{
 
 router.post('/create',validator.body(createAccountSchema),usernameMiddleware,emailMiddleware,passwordMiddleware,createAccount)
 
-
+router.post('/login',validator.body(loginSchema),loginController)
 
 
 
