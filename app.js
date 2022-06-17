@@ -1,5 +1,6 @@
 const express = require('express')
 require('dotenv').config()
+const db = require('./models')
 const app = express()
 
 // middleware
@@ -39,6 +40,8 @@ app.use((err,req,res,next)=>{
 })
 
 
-app.listen(process.env.PORT,()=>{
-    console.log(`Listening on port ${process.env.PORT}`)
+db.sequelize.sync().then(()=>{
+    app.listen(process.env.PORT,()=>{
+        console.log(`Listening on port ${process.env.PORT}`)
+    })
 })
