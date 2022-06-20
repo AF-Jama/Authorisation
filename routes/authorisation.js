@@ -5,6 +5,7 @@ const {createAccountSchema,loginSchema} = require('../schema.js') // payloads sc
 const {emailMiddleware,passwordMiddleware,usernameMiddleware} = require('../middleware/custom_middleware.js')
 const {createAccount} = require('../controllers/create_controller.js') // create account controller
 const {loginController} = require('../controllers/login_controller.js')
+const {logoutController} = require('../controllers/logout.controller.js')
 
 const router = express.Router()
 
@@ -23,6 +24,7 @@ router.post('/create',validator.body(createAccountSchema),usernameMiddleware,ema
 
 router.post('/login',validator.body(loginSchema),loginController)
 
+router.post('/logout',logoutController) // checks if user is logged by checking cookie then logout accordingly
 
 
 

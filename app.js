@@ -1,11 +1,13 @@
 const express = require('express')
 require('dotenv').config()
 const db = require('./models')
+const cookieParser = require('cookie-parser')
 const app = express()
 
 // middleware
 app.use(express.urlencoded({extended:false}))
 app.use(express.json()) // to parse incoming json payload
+app.use(cookieParser()) // cookie parser middleware
 
 
 
@@ -40,8 +42,8 @@ app.use((err,req,res,next)=>{
 })
 
 
-db.sequelize.sync().then(()=>{
-    app.listen(process.env.PORT,()=>{
-        console.log(`Listening on port ${process.env.PORT}`)
-    })
+
+app.listen(process.env.PORT,()=>{
+    console.log(`Listening on port ${process.env.PORT}`)
+
 })
